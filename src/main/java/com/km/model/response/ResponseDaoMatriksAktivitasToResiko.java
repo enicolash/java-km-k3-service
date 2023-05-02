@@ -3,6 +3,7 @@ package com.km.model.response;
 import java.util.List;
 
 public class ResponseDaoMatriksAktivitasToResiko {
+	private Integer id_map_aktivitas_untill_resiko;
 	private String aktivitas_pekerjaan_code;
 	private String bahaya_code;
 	private String bahaya_desc;
@@ -80,6 +81,13 @@ public class ResponseDaoMatriksAktivitasToResiko {
 	public void setTipe_bahaya_desc(String tipe_bahaya_desc) {
 		this.tipe_bahaya_desc = tipe_bahaya_desc;
 	}
+	public Integer getId_map_aktivitas_untill_resiko() {
+		return id_map_aktivitas_untill_resiko;
+	}
+	public void setId_map_aktivitas_untill_resiko(Integer id_map_aktivitas_untill_resiko) {
+		this.id_map_aktivitas_untill_resiko = id_map_aktivitas_untill_resiko;
+	}
+	
 	
 }
 

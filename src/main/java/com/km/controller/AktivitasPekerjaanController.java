@@ -42,6 +42,24 @@ public class AktivitasPekerjaanController {
 		}
 	 
 	 }
+	
+	@RequestMapping(value = "/mapWbsBahaya", method = RequestMethod.GET)
+    public ResponseEntity<Map<String, Object>> mapWbsBahaya() {
+	 List<?> response = new ArrayList<>();
+	 Map<String, Object> result = new HashMap<String, Object>();
+	 try {
+		  response = service.mapWbsBahayaData();
+		  result = checkService(response);
+          return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+	} catch (Exception e) {
+		 	String errorMessage = e.getMessage();
+			Logger.error(errorMessage);
+		 	result = checkService(errorMessage);
+            e.printStackTrace();
+            return new ResponseEntity<Map<String, Object>>(result, HttpStatus.BAD_REQUEST);
+	}
+ 
+ }
 		
 		public Map<String, Object> checkService (List<?> resultService){
 			return resultServiceTrue(resultService);

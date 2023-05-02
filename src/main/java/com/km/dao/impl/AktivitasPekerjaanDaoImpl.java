@@ -31,4 +31,18 @@ public class AktivitasPekerjaanDaoImpl implements AktivitasPekerjaanDao {
 	     }
 		return response;
 	}
+
+	@Override
+	public List<Map<String, Object>> mapWbsBahayaData(Conn connection) throws Exception {
+		List<Map<String, Object>> response = new ArrayList<>();
+		try {
+			connection.ps = connection.conn.prepareStatement(ConstandSql.map_wbs_to_bahaya);
+			connection.rs = connection.ps.executeQuery();
+			response = helper.converResultSetToList(connection.rs);
+		 } catch (Exception e) {
+	          e.printStackTrace();
+	          throw new Exception(e.getMessage());
+	     }
+		return response;
+	}
 }
