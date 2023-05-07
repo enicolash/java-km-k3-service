@@ -18,14 +18,16 @@ public class ConstandSql {
 			+ "			 			 WHERE S.sasaran_code = MAUR.sasaran_code) AS sasaran_desc\r\n"
 			+ "			 			 FROM alvia_km_k3.mst_map_aktivitas_until_resiko MAUR  \r\n"
 			+ "			 			 WHERE MAUR.aktivitas_pekerjaan_code = ?\r\n"
-			+ "						 AND MAUR.bahaya_code = ?";
+			+ "						 AND MAUR.bahaya_code = ?\r\n"
+			+ "						 ORDER BY MAUR.id";
 	
 	public static final String matriks_resiko_to_penyebab = "SELECT MARP.penyebab_code,(SELECT P.penyebab_desc \r\n"
 			+ "FROM  alvia_km_k3.mst_penyebab P\r\n"
 			+ "WHERE P.penyebab_code = MARP.penyebab_code) AS penyebab_desc\r\n"
 			+ "FROM alvia_km_k3.mst_map_resiko_to_penyebab MARP  \r\n"
 			+ "WHERE MARP.aktivitas_pekerjaan_code = ? \r\n"
-			+ "AND MARP.resiko_code = ?";
+			+ "AND MARP.id_map_aktivitas_untill_resiko = ?"
+			+ "ORDER BY MARP.id";
 	
 	public static final String matriks_map_program = "SELECT id,sasaran_code,sasaran_desc,sumber_daya_desc,jangka_waktu_desc,indikator_pencapaian_desc,monitoring_desc,penanggung_jawab_desc \r\n"
 			+ "FROM alvia_km_k3.mst_map_program \r\n"

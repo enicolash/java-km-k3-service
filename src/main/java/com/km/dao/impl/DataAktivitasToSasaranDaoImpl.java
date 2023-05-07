@@ -53,7 +53,7 @@ public class DataAktivitasToSasaranDaoImpl implements DataAktivitasToSasaranDao 
 	
 	public static ResponseDaoMatriksAktivitasToResiko queryDataToModelMatriks (ResultSet rs,Conn connection) throws Exception{
 		ResponseDaoMatriksAktivitasToResiko dataMatriks = new ResponseDaoMatriksAktivitasToResiko();
-//		Integer idFromQuery = rs.getInt("id");
+		Integer idFromQuery = rs.getInt("id");
 		String aktivitasPekerjaanCodeFromQuery = rs.getString("aktivitas_pekerjaan_code") == null ? "" :  rs.getString("aktivitas_pekerjaan_code") .toString();
 		String bahayaCodeFromQuery = rs.getString("bahaya_code") == null ? "" :  rs.getString("bahaya_code") .toString();
 		String bahayaDescFromQuery = rs.getString("bahaya_desc") == null ? "" :  rs.getString("bahaya_desc") .toString();
@@ -64,7 +64,7 @@ public class DataAktivitasToSasaranDaoImpl implements DataAktivitasToSasaranDao 
 		String pengendalianDescFromQuery = rs.getString("pengendalian_desc") == null ? "" :  rs.getString("pengendalian_desc") .toString();
 		String sasaranCodeFromQuery = rs.getString("sasaran_code") == null ? "" :  rs.getString("sasaran_code") .toString();
 		String sasaranDescFromQuery = rs.getString("sasaran_desc") == null ? "" :  rs.getString("sasaran_desc") .toString();
-//		dataMatriks.setId_map_aktivitas_untill_resiko(idFromQuery);
+		dataMatriks.setId_map_aktivitas_untill_resiko(idFromQuery);
 		dataMatriks.setAktivitas_pekerjaan_code(aktivitasPekerjaanCodeFromQuery);
 		dataMatriks.setBahaya_code(bahayaCodeFromQuery);
 		dataMatriks.setBahaya_desc(bahayaDescFromQuery);
@@ -81,12 +81,14 @@ public class DataAktivitasToSasaranDaoImpl implements DataAktivitasToSasaranDao 
 	
 	public static List<String> dataResikoToPenyebab(ResponseDaoMatriksAktivitasToResiko parameter,Conn connection)throws Exception{
 		List<String> response = new ArrayList<>();
-		String resiko_code = parameter.getResiko_code() == null ? "" : parameter.getResiko_code().toString();
+//		String resiko_code = parameter.getResiko_code() == null ? "" : parameter.getResiko_code().toString();
+		String id_map_akitivitas_untill_resiko =  parameter.getId_map_aktivitas_untill_resiko() == null ? "" : parameter.getId_map_aktivitas_untill_resiko().toString();
 		String aktivitas_pekerjaan_code =  parameter.getAktivitas_pekerjaan_code() == null ? "" : parameter.getAktivitas_pekerjaan_code();
+		System.out.println(id_map_akitivitas_untill_resiko);
 		try {
 			connection.ps = connection.conn.prepareStatement(ConstandSql.matriks_resiko_to_penyebab);
 			connection.ps.setString(1, aktivitas_pekerjaan_code);
-			connection.ps.setString(2, resiko_code);
+			connection.ps.setString(2, id_map_akitivitas_untill_resiko);
 			connection.rs = connection.ps.executeQuery();
 			response = convertQueryDataToListPenyebab(connection.rs);
 		 } catch (Exception e) {
